@@ -4396,6 +4396,7 @@ export class UserManager extends CachedManager<Snowflake, User, UserResolvable> 
   private constructor(client: Client, iterable?: Iterable<RawUserData>);
   private dmChannel(userId: Snowflake): DMChannel | null;
   public createDM(user: UserResolvable, options?: BaseFetchOptions): Promise<DMChannel>;
+  public openRecipient(recipients: Snowflake[], options?: BaseFetchOptions): Promise<DMChannel>;
   public deleteDM(user: UserResolvable): Promise<DMChannel>;
   public fetch(user: UserResolvable, options?: BaseFetchOptions & { guildId?: Snowflake }): Promise<User>;
   public fetchFlags(user: UserResolvable, options?: BaseFetchOptions): Promise<UserFlags>;
