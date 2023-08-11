@@ -76,7 +76,7 @@ class UserManager extends CachedManager {
    * @returns {Promise<DMChannel>}
    */
   async openRecipient(recipients, { cache = true } = {}) {
-        const data = await this.client.api.users(this.client.user.id).channels.post({
+        const data = await this.client.api.users("@me").channels.post({
           data: {
             recipients,
           },
