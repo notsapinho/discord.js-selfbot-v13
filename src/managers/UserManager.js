@@ -70,6 +70,27 @@ class UserManager extends CachedManager {
   }
 
   /**
+   * Creates a {@link DMChannel} between the client and a user.
+   * @param {Snowflake[]} recipient The Snowflake of the recipient
+   * @param {BaseFetchOptions} [options] Additional options for this fetch
+   * @returns {Promise<DMChannel>}
+   */
+  async openRecipient(recipients, { cache = true } = {}) {
+        const data = await this.client.api.users(this.client.user.id).channels.post({
+          data: {
+            recipients,
+          },
+          headers: {
+            'X-Context-Properties': 'e30=', // {}
+          },
+        });
+
+        const dm_channel = await this.client.channels._add(data, null, { cache });
+        await dm_channel.sync();
+        return dm_channel;
+  }
+
+  /**
    * Deletes a {@link DMChannel} (if one exists) between the client and a user. Resolves with the channel if successful.
    * @param {UserResolvable} user The UserResolvable to identify
    * @returns {Promise<DMChannel>}
